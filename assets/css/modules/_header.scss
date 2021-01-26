@@ -1,0 +1,373 @@
+.header {
+  @extend %container;
+  position: relative;
+  font-family: $font-alt;
+  font-weight: 500;
+  line-height: 1;
+  padding-top: space(6);
+  padding-bottom: space(3);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border);
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    height: 1px;
+  }
+}
+
+.header-light .header {
+  background-color: var(--background-light);
+}
+
+.header.is-inversed {
+  color: var(--color-inversed);
+  border-bottom-color: var(--color-inversed);
+  --shadow: rgba(0, 0, 0, 0.2);
+
+  a,
+  button {
+    opacity: 0.6;
+  }
+
+  a:hover,
+  a[aria-current],
+  button:hover {
+    color: var(--color-inversed);
+    opacity: 1;
+  }
+
+  &::after {
+    opacity: 0.3;
+    background: var(--color-inversed);
+  }
+}
+.header svg {
+  width: 12px;
+  height: 12px;
+  margin-right: space(1);
+}
+.header ul {
+  display: flex;
+  align-items: center;
+}
+.header-nav {
+  height: 26px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.header-nav small {
+  font-weight: normal;
+}
+.header-nav li {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  white-space: nowrap;
+}
+.header-nav li[hidden] {
+  display: none;
+}
+.header-nav .icon-star {
+  width: 14px;
+  height: 14px;
+  margin-bottom: -1px;
+}
+.header a:hover,
+.header button:hover,
+.header a[aria-current] {
+  color: var(--contrast);
+}
+.header-nav > * + * {
+  margin-left: space(6);
+}
+.header-side {
+  margin-right: space(-2);
+  margin-left: space(2);
+}
+.header-side > li {
+  margin-right: space(2);
+}
+.header-side__auth {
+  white-space: nowrap;
+}
+.header .header__home {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-right: 1px solid var(--border);
+  margin-right: space(2);
+  padding-right: space(1);
+
+  a {
+    display: flex;
+    height: 26px;
+    align-items: center;
+  }
+}
+.header__home + li {
+  margin-left: 0;
+}
+.header__search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 16px;
+  border-right: 1px solid var(--border);
+  padding-right: space(1);
+}
+.header__account a {
+  display: flex;
+}
+.header__account span {
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header__account svg {
+  display: block;
+  align-self: center;
+}
+.header__notification .icon,
+.header__notification > button {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: 0;
+}
+.header__notification {
+  position: relative;
+  padding-right: calc(1 * var(--space));
+
+  button {
+    display: block;
+  }
+}
+.header__logout {
+  span {
+    display: none;
+  }
+  svg {
+    margin-right: 0;
+  }
+}
+
+// Déclinaison bleu
+// =============
+.header-filled {
+  background: #415ede;
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+  width: 100% !important;
+  height: 75px;
+  color: #fff;
+  @extend %container;
+
+  &::after {
+    display: none !important;
+  }
+
+  .header-nav,
+  .header-side {
+    a {
+      position: relative;
+      padding-left: 7px;
+      opacity: 1;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        top: -4px;
+        left: 0px;
+        width: 26px;
+        height: 26px;
+        padding: 3px;
+        background-color: #2d47b8;
+        border-radius: 18px;
+        z-index: 2;
+      }
+    }
+    .icon {
+      z-index: 3;
+      position: relative;
+      margin-right: space(1);
+      filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.4));
+    }
+    a[aria-current] {
+      opacity: 1;
+      color: #fff !important;
+    }
+  }
+
+  .header__home a::after {
+    display: none;
+  }
+
+  .header__home,
+  .header__search {
+    border-color: #2d47b8;
+  }
+}
+.header__burger {
+  display: none;
+  margin-left: space(1);
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+  }
+  span::after, span::before, span {
+    content:'';
+    display: block;
+    width:12px;
+    height: 2px;
+    background: currentColor;
+    position: relative;
+    transition: .3s;
+  }
+  span::after {
+    top:-6px;
+  }
+  span::before {
+    bottom:-4px;
+  }
+  span {
+    font-size: 0;
+    text-indent: -3000px;
+  }
+}
+
+@media (max-height: 700px) {
+  .header {
+    padding-top: space(4);
+  }
+}
+
+@include down(985) {
+  .header-nav > * + * {
+    margin-left: space(4);
+  }
+  .header-side__auth {
+    display: none;
+  }
+  .header__burger {
+    display: block;
+  }
+  .header {
+    padding-top: space(4);
+  }
+  .header .header-nav li:last-child {
+    display: none;
+  }
+  .header .header-nav .header__home {
+    display: block;
+    border: none !important;
+  }
+  .header.is-open {
+    color: var(--color);
+  }
+  .header.is-open a{
+    opacity: 1;
+    color: var(--color) !important;
+  }
+  .header.is-open a:hover,
+  .header.is-open a[aria-current] {
+    opacity: 1;
+    color: var(--contrast) !important;
+  }
+  .header.is-open .header-nav {
+    display: grid;
+    grid-gap: space(4);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.90);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 4px var(--shadow);
+    border-radius: 3px;
+    transition: opacity .3s;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+    padding: space(2);
+
+    @include dark {
+      background: #171933D8;
+    }
+
+    & li {
+      display: block!important;
+      width: 200px;
+      margin-left: 0 !important;
+      animation: slideIn .5s both;
+      font-size: 1.4rem;
+    }
+
+    .header__home {
+      display: none!important;
+    }
+
+    @for $i from 1 through 6 {
+      & li:nth-child(#{$i}) {
+        animation-delay: .05s * $i;
+      }
+    }
+  }
+  .header.is-open .header-side__auth {
+    display: block;
+    white-space: nowrap;
+  }
+  .header.is-open .header__search {
+    display: none;
+  }
+  .header.is-open .header-side {
+    position: fixed;
+    top: space(3);
+    right: space(2);
+    z-index: 4;
+  }
+  .header.is-open .header__account span {
+    display: block;
+  }
+  .header.is-open .header__burger {
+    span::after {
+      top: -2px;
+      transform: rotate(0deg);
+    }
+    span {
+      transform: rotate(-135deg);
+    }
+    span::before {
+      bottom: 0;
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+@include down(600) {
+  .header__account span {
+    display: none;
+  }
+}
+
